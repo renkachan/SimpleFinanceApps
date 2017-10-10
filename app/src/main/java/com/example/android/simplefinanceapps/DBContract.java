@@ -87,9 +87,9 @@ public class DBContract {
 //            cursor.close();
 //            return true;
 //        }
-        public static List<MonthlyExpenditureIncome> getData(SQLiteDatabase db) {
+        public static ArrayList<MonthlyExpenditureIncome> getData(SQLiteDatabase db) {
             Cursor cursor = db.rawQuery("select * from " + TABLE_NAME, null);
-            List<MonthlyExpenditureIncome> items = new ArrayList<>();
+            ArrayList<MonthlyExpenditureIncome> items = new ArrayList<>();
 
             while (cursor.moveToNext())
             {
