@@ -23,7 +23,8 @@ public class ReportGeneratorAdapter extends ArrayAdapter<MonthlyExpenditureIncom
 
     }
 
-    public ReportGeneratorAdapter(Context context, int resource, ArrayList<MonthlyExpenditureIncome> item)
+    public ReportGeneratorAdapter(Context context, int resource,
+                                  ArrayList<MonthlyExpenditureIncome> item)
     {
         super(context, resource, item);
         monthlyData = item;
@@ -33,7 +34,8 @@ public class ReportGeneratorAdapter extends ArrayAdapter<MonthlyExpenditureIncom
     public View getView(final int position, View convertView, ViewGroup parent) {
         final ViewHolder viewHolder;
         if(convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.layout_blueprint_report, null);
+            convertView = LayoutInflater.from(getContext()).inflate(
+                    R.layout.layout_blueprint_report, null);
             viewHolder = new ViewHolder();
             viewHolder.month = (TextView)convertView.findViewById(R.id.selectedMonth);
             viewHolder.income = (TextView) convertView.findViewById(R.id.bluePrint_incomeValue);
@@ -51,7 +53,8 @@ public class ReportGeneratorAdapter extends ArrayAdapter<MonthlyExpenditureIncom
 
         viewHolder.month.setText(monthlyData.get(position).getMonth());
         viewHolder.income.setText(String.format("%d", monthlyData.get(position).getIncome()));
-        viewHolder.expenditure.setText(String.format("%d", monthlyData.get(position).getExpenditure()));
+        viewHolder.expenditure.setText(String.format("%d", monthlyData.
+                get(position).getExpenditure()));
 
         return convertView;
     }

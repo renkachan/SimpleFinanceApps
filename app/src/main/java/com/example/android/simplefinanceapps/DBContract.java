@@ -88,7 +88,9 @@ public class DBContract {
 //            return true;
 //        }
         public static ArrayList<MonthlyExpenditureIncome> getData(SQLiteDatabase db) {
-           Cursor cursor = db.rawQuery("SELECT month, SUM(incomePerMonth) as " + COLUMN_INCOME + ", SUM(expPerMonth) as " + COLUMN_EXPENDITURE + " from financeReporting group by month" , null);
+           Cursor cursor = db.rawQuery("SELECT month, SUM(incomePerMonth) as " +
+                   COLUMN_INCOME + ", " + "SUM(expPerMonth) as " + COLUMN_EXPENDITURE +
+                   " from financeReporting group by month" , null);
 
             ArrayList<MonthlyExpenditureIncome> items = new ArrayList<>();
 
