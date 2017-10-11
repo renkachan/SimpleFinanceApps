@@ -22,7 +22,7 @@ import java.text.DecimalFormat;
 public class ExpenditureRecorder extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Spinner spinner;
-    String selectedMonth ,formattedValue;;
+    String selectedMonth ,formattedValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
