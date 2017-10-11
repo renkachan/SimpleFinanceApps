@@ -19,17 +19,19 @@ import java.text.DecimalFormat;
  * Created by robert.arifin on 09/10/2017.
  */
 
-public class ExpenditureRecorder extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class ExpenditureRecorder extends AppCompatActivity
+        implements AdapterView.OnItemSelectedListener {
 
     Spinner spinner;
-    String selectedMonth ,formattedValue;;
+    String selectedMonth ,formattedValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_expenditure);
         spinner = (Spinner) findViewById(R.id.expSpinner);
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.months, android.R.layout.simple_spinner_item);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.months,
+                android.R.layout.simple_spinner_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
         getFormattedNumber();
@@ -56,14 +58,16 @@ public class ExpenditureRecorder extends AppCompatActivity implements AdapterVie
         }
         else {
             if(expValue.getText().toString().contains(",")) {
-                expValueWithoutComma = Integer.parseInt(expValue.getText().toString().replaceAll(",", ""));
+                expValueWithoutComma = Integer.parseInt(expValue.getText().
+                        toString().replaceAll(",", ""));
             }
             else {
                 expValueWithoutComma = Integer.parseInt(expValue.getText().toString());
             }
             DBHandler handler = new DBHandler(this);
             Boolean dataExist = false;
-            DBContract.TABLE_EXPINCOME.insertExpData(handler.getWritableDatabase(), selectedMonth, expValueWithoutComma);
+            DBContract.TABLE_EXPINCOME.insertExpData(handler.getWritableDatabase(),
+                    selectedMonth, expValueWithoutComma);
             handler.close();
 //            dataExist = DBContract.TABLE_EXPINCOME.CheckDataIsExistOrNot(handler.getWritableDatabase(), selectedMonth);
 //            if(dataExist == true)
@@ -103,7 +107,8 @@ public class ExpenditureRecorder extends AppCompatActivity implements AdapterVie
                 }
                 if(expValue.length()!= 0)
                 {
-                    formattedValue = formatter.format((Integer.parseInt(expValue.getText().toString())));
+                    formattedValue = formatter.format((Integer.parseInt(expValue.
+                            getText().toString())));
                 }
                 else    {
                     formattedValue = "";

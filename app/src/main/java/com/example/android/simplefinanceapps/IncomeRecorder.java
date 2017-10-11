@@ -19,7 +19,8 @@ import java.text.DecimalFormat;
  * Created by robert.arifin on 09/10/2017.
  */
 
-public class IncomeRecorder extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class IncomeRecorder extends AppCompatActivity implements
+        AdapterView.OnItemSelectedListener {
 
         Spinner spinner;
         String selectedMonth ,formattedValue;;
@@ -29,7 +30,8 @@ public class IncomeRecorder extends AppCompatActivity implements AdapterView.OnI
             super.onCreate(savedInstanceState);
             setContentView(R.layout.layout_income);
             spinner = (Spinner) findViewById(R.id.incomeSpinner);
-            ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.months, android.R.layout.simple_spinner_item);
+            ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.months,
+                    android.R.layout.simple_spinner_item);
             spinner.setAdapter(adapter);
             spinner.setOnItemSelectedListener(this);
             getFormattedNumber();
@@ -56,14 +58,16 @@ public class IncomeRecorder extends AppCompatActivity implements AdapterView.OnI
             }
             else {
                 if (incomeValue.getText().toString().contains(",")) {
-                    incomeValueWithoutComma = Integer.parseInt(incomeValue.getText().toString().replaceAll(",", ""));
+                    incomeValueWithoutComma = Integer.parseInt(incomeValue.getText().
+                            toString().replaceAll(",", ""));
                 }
                 else {
                     incomeValueWithoutComma = Integer.parseInt(incomeValue.getText().toString());
                 }
                 DBHandler handler = new DBHandler(this);
                 Boolean dataExist = false;
-                DBContract.TABLE_EXPINCOME.insertIncomeData(handler.getWritableDatabase(), selectedMonth, incomeValueWithoutComma);
+                DBContract.TABLE_EXPINCOME.insertIncomeData(handler.getWritableDatabase(),
+                        selectedMonth, incomeValueWithoutComma);
                 handler.close();
 //            dataExist = DBContract.TABLE_EXPINCOME.CheckDataIsExistOrNot(handler.getWritableDatabase(), selectedMonth);
 //            if(dataExist == true)
@@ -103,7 +107,8 @@ public class IncomeRecorder extends AppCompatActivity implements AdapterView.OnI
                     }
                     if(incomeValue.length()!= 0)
                     {
-                        formattedValue = formatter.format((Integer.parseInt(incomeValue.getText().toString())));
+                        formattedValue = formatter.format((Integer.parseInt
+                                (incomeValue.getText().toString())));
                     }
                     else    {
                         formattedValue = "";

@@ -50,7 +50,7 @@ public class DBContract {
                                             int expenditure) {
             ContentValues values = new ContentValues();
             values.put(COLUMN_MONTH, month);
-            values.put(COLUMN_INCOME, expenditure);
+            values.put(COLUMN_EXPENDITURE, expenditure);
             return db.insert(TABLE_NAME, null, values);
         }
 
@@ -87,13 +87,16 @@ public class DBContract {
 //            cursor.close();
 //            return true;
 //        }
-        public static List<MonthlyExpenditureIncome> getData(SQLiteDatabase db) {
-            Cursor cursor = db.rawQuery("select * from " + TABLE_NAME, null);
-            List<MonthlyExpenditureIncome> items = new ArrayList<>();
+        public static ArrayList<MonthlyExpenditureIncome> getData(SQLiteDatabase db) {
+           Cursor cursor = db.rawQuery("SELECT month, SUM(incomePerMonth) as " +
+                   COLUMN_INCOME + ", " + "SUM(expPerMonth) as " + COLUMN_EXPENDITURE +
+                   " from financeReporting group by month" , null);
+
+            ArrayList<MonthlyExpenditureIncome> items = new ArrayList<>();
 
             while (cursor.moveToNext())
             {
-                items.add(addItem(cursor));
+              items.add(addItem(cursor));
             }
 
             cursor.close();
@@ -102,7 +105,7 @@ public class DBContract {
 
         public static MonthlyExpenditureIncome addItem(Cursor cursor) {
             MonthlyExpenditureIncome financeData = new MonthlyExpenditureIncome(
-                    cursor.getString(cursor.getColumnIndexOrThrow(TABLE_EXPINCOME.COLUMN_MONTH)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MONTH)),
                     cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_INCOME)),
                     cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_EXPENDITURE)));
             return financeData;

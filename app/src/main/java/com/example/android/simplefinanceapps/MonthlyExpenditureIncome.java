@@ -11,9 +11,9 @@ public class MonthlyExpenditureIncome {
 
     public MonthlyExpenditureIncome(String month, int income, int expenditure )
     {
-        this.month = this.month + month;
-        this.income = this.income + income;
-        this.expenditure = this.expenditure + expenditure;
+        this.month = month;
+        this.income = income;
+        this.expenditure = expenditure;
     }
 
     public int getExpenditure()
@@ -24,5 +24,9 @@ public class MonthlyExpenditureIncome {
     public int getIncome()
     {
         return income;
+    }
+
+    public String getMonth () {
+        return month;
     }
 }
