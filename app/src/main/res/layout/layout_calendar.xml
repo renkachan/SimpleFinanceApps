@@ -4,27 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/monthlyReport"
+    <CalendarView
+        android:id="@+id/dateSelection"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:padding="20dp">
+        android:layout_height="wrap_content">
+    </CalendarView>
 
-    </ListView>
-
-    <Button
-        android:onClick="deleteAllReport"
-        android:text="Delete all"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"/>
-
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/date"/>
     <Button
-        android:layout_marginTop="20dp"
+        android:onClick="confirmDateSelection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
-        android:onClick="backToMainMenu"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Select"/>
 
 </LinearLayout>

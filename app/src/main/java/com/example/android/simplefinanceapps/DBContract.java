@@ -22,6 +22,8 @@ public class DBContract {
     public static final class TABLE_EXPINCOME implements BaseColumns {
         public static final String TABLE_NAME = "financeReporting";
         public static final String COLUMN_MONTH = "month";
+        public static final String COLUMN_YEAR = "year";
+        public static final String COLUMN_DAY = "day";
         public static final String COLUMN_INCOME = "incomePerMonth";
         public static final String COLUMN_EXPENDITURE = "expPerMonth";
 
@@ -69,12 +71,10 @@ public class DBContract {
         }
 
 
-//        public static void deleteData(SQLiteDatabase db, String playerName) {
-//            String selection = COLUMN_MONTH + "=?";
-//            String[] selectionArgs = {playerName};
-//            db.delete(TABLE_NAME, selection, selectionArgs);
-//            //db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COLUMN_PLAYER_NAME + " = '" + playerName + "'" );
-//        }
+        public static void deleteData(SQLiteDatabase db) {
+            //db.delete(TABLE_NAME, selection, selectionArgs);
+            db.execSQL("DELETE FROM " + TABLE_NAME);
+        }
 
 //        public static boolean CheckDataIsExistOrNot(SQLiteDatabase db, String month) {
 //            String query = "Select * from " + TABLE_NAME + " where " + COLUMN_MONTH + " = " + month;
