@@ -8,45 +8,56 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 /**
  * Created by robert.arifin on 09/10/2017.
  */
 
-public class ExpenditureRecorder extends AppCompatActivity
-        implements AdapterView.OnItemSelectedListener {
-
-    Spinner spinner;
+public class ExpenditureRecorder extends AppCompatActivity {
+    View view1, view2;
     String selectedMonth ,formattedValue;
+    int selectedDay, selectedYear;
+    CalendarView calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_expenditure);
-        spinner = (Spinner) findViewById(R.id.expSpinner);
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.months,
-                android.R.layout.simple_spinner_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+        view1 = getLayoutInflater().inflate(R.layout.layout_expenditure, null);
+        view2 = getLayoutInflater().inflate(R.layout.layout_calendar, null);
+        setContentView(view1);
         getFormattedNumber();
     }
 
-
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        TextView currentMonth = (TextView) view;
-        selectedMonth = currentMonth.getText().toString();
-    }
     public void backToMainMenu (View v) {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
+    }
+
+    public  void selectDay(View v) {
+        view1.setVisibility(View.GONE);
+        view2.setVisibility(View.VISIBLE);
+        setContentView(view2);
+        calendar = (CalendarView) findViewById(R.id.dateSelection);
+        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+                GregorianCalendar calendar = new GregorianCalendar(year, month, dayOfMonth);
+                selectedMonth = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US);
+                selectedDay = dayOfMonth;
+                selectedYear = year;
+
+            }
+        });
     }
 
     public void addThisMonthExpenditure(View v) {
@@ -69,6 +80,7 @@ public class ExpenditureRecorder extends AppCompatActivity
             DBContract.TABLE_EXPINCOME.insertExpData(handler.getWritableDatabase(),
                     selectedMonth, expValueWithoutComma);
             handler.close();
+
 //            dataExist = DBContract.TABLE_EXPINCOME.CheckDataIsExistOrNot(handler.getWritableDatabase(), selectedMonth);
 //            if(dataExist == true)
 //            {
@@ -78,6 +90,12 @@ public class ExpenditureRecorder extends AppCompatActivity
 //                DBContract.TABLE_EXPINCOME.insertIncomeData(handler.getWritableDatabase(),selectedMonth,  Integer.parseInt(expValue.getText().toString()));
 //            }
         }
+    }
+
+    public void confirmDateSelection(View v)    {
+        view2.setVisibility(View.GONE);
+        view1.setVisibility(View.VISIBLE);
+        setContentView(view1);
     }
 
     public void getFormattedNumber()    {
@@ -118,12 +136,5 @@ public class ExpenditureRecorder extends AppCompatActivity
                 expValue.addTextChangedListener(this);
             }
         });
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-
     }
 }
