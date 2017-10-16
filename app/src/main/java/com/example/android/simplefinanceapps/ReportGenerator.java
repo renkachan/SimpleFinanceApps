@@ -56,7 +56,8 @@ public class ReportGenerator extends AppCompatActivity {
                         handler.close();
                         monthlyReport.clear();
                         adapter = new ReportGeneratorAdapter(
-                                ReportGenerator.this, R.layout.layout_blueprint_report, monthlyReport);
+                                ReportGenerator.this, R.layout.layout_blueprint_report
+                                , monthlyReport);
                         listView = (ListView) findViewById(R.id.monthlyReport);
                         listView.setAdapter(adapter);
                     }

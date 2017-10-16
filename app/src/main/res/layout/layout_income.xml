@@ -13,40 +13,13 @@
         android:onClick="selectDay"
         android:layout_gravity="center_horizontal" />
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
-
-        <TextView
-            android:id="@+id/incomeText"
-            android:textSize="20sp"
-            android:text="Income"
-            android:layout_marginLeft="25dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id= "@+id/incomeInput"
-            android:layout_width="wrap_content"
-            android:hint="income value"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_alignBaseline="@+id/incomeText"
-            android:layout_toEndOf="@+id/incomeText"
-            android:layout_marginLeft="70sp"
-            />
-    </RelativeLayout>
-
     <Button
-        android:id="@+id/addBtn"
-        android:text="Add"
-        android:onClick="addThisMonthIncome"
+        android:onClick="openInputMenu"
+        android:layout_marginTop="40dp"
+        android:text="Add income"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40sp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/backBtn"
