@@ -40,7 +40,11 @@ public class IncomeRecorder extends AppCompatActivity   {
             view1.setVisibility(View.GONE);
             view2.setVisibility(View.VISIBLE);
             setContentView(view2);
+            Calendar normalCalendar = GregorianCalendar.getInstance();
             calendar = (CalendarView) findViewById(R.id.dateSelection);
+            selectedDay = normalCalendar.get(Calendar.DAY_OF_MONTH);
+            selectedMonth = normalCalendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US);
+            selectedYear = normalCalendar.get(Calendar.YEAR);
             calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener()    {
                 @Override
                 public void onSelectedDayChange(CalendarView view, int year, int month,
