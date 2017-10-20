@@ -2,37 +2,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#8BC34A"
     android:orientation= "vertical">
 
 
-    <Button
-        android:id="@+id/incomeBtn"
-        android:text="Income"
-        android:onClick="openIncome"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100sp"
+    <LinearLayout
+        android:layout_marginTop="120dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
-
-    <Button
-        android:id="@+id/expBtn"
-        android:text="Expenditure"
-        android:onClick="openExpenditure"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-    <Button
-        android:id="@+id/reportBtn"
-        android:onClick="openReport"
-        android:text="Report"
-        android:layout_marginTop="40sp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/incomeBtn"
+            android:text="Income"
+            android:onClick="openIncome"
+            android:background="@drawable/incomebuttonshape"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100sp"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            />
+
+        <Button
+            android:id="@+id/expBtn"
+            android:text="exp"
+            android:layout_marginLeft="15dp"
+            android:onClick="openExpenditure"
+            android:background="@drawable/expenditurebuttonshape"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40sp"
+            android:textSize="15sp"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            />
+        <Button
+            android:id="@+id/reportBtn"
+            android:onClick="openReport"
+            android:text="Report"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/reportbuttonshape"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            />
 
 
+    </LinearLayout>
 </LinearLayout>
