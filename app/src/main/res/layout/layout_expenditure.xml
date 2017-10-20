@@ -13,42 +13,13 @@
         android:onClick="selectDay"
         android:layout_gravity="center_horizontal" />
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="20dp">
-
-        <TextView
-            android:id="@+id/expenditureText"
-            android:textSize="20sp"
-            android:text="Expenditure"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:hint="expenditure value"
-            android:id="@+id/expenditureInput"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_alignBaseline="@+id/expenditureText"
-            android:layout_toEndOf="@+id/expenditureText"
-            android:layout_marginLeft="30dp"
-            />
-    </RelativeLayout>
-
-
-
     <Button
-        android:id="@+id/addBtn"
-        android:onClick="addThisMonthExpenditure"
-        android:text="Add"
+        android:onClick="openInputMenu"
+        android:layout_marginTop="40dp"
+        android:text="Add expenditure"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40sp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/backBtn"

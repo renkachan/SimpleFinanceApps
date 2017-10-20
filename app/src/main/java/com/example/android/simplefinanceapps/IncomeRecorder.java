@@ -6,11 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +21,7 @@ import java.util.Locale;
  */
 
 public class IncomeRecorder extends AppCompatActivity   {
-    View view1, view2;
+    View view1, view2, view3;
     String formattedValue, selectedMonth;
     CalendarView calendar;
     int selectedDay, selectedYear;
@@ -32,11 +29,11 @@ public class IncomeRecorder extends AppCompatActivity   {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            selectedMonth = "";
             view1 = getLayoutInflater().inflate(R.layout.layout_income, null);
             view2 = getLayoutInflater().inflate(R.layout.layout_calendar, null);
+            view3 = getLayoutInflater().inflate(R.layout.layout_input_income, null);
             setContentView(view1);
-            getFormattedNumber();
-
         }
 
         public  void selectDay(View v)  {
@@ -64,6 +61,7 @@ public class IncomeRecorder extends AppCompatActivity   {
         public void confirmDateSelection(View v)    {
             view2.setVisibility(View.GONE);
             view1.setVisibility(View.VISIBLE);
+            Toast.makeText(this, "You have selected " + selectedDay + " " + selectedMonth + " " + selectedYear, Toast.LENGTH_SHORT).show();
             setContentView(view1);
         }
 
@@ -72,25 +70,64 @@ public class IncomeRecorder extends AppCompatActivity   {
             startActivity(i);
         }
 
+        public void openInputMenu(View v)   {
+            if(!selectedMonth.equals(""))    {
+                view1.setVisibility(View.GONE);
+                view3.setVisibility(View.VISIBLE);
+                setContentView(view3);
+                getFormattedNumber();
+            }
+               else {
+                Toast.makeText(this, "You haven't selected the day",Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        public void inputTheNumber(View v)  {
+            Button b = (Button) v;
+            String displayedText = "";
+            TextView incomeValue = (TextView) findViewById(R.id.incomeInput);
+            displayedText =  incomeValue.getText().toString();
+            String buttonText = b.getText().toString();
+            if(displayedText.equals(""))
+            {
+                displayedText = buttonText;
+            }
+            else    {
+                displayedText += buttonText;
+            }
+            incomeValue.setText(displayedText);
+        }
+
+        public void removeNumber(View v)    {
+            TextView incomeValue = (TextView) findViewById(R.id.incomeInput);
+            if(!incomeValue.getText().equals("0"))
+            {
+                incomeValue.setText(incomeValue.getText().toString().substring(0,incomeValue.getText().length() - 1));
+            }
+            if(incomeValue.length() == 0)
+            {
+                incomeValue.setText("0");
+            }
+        }
+
         public void addThisMonthIncome(View v) {
             int incomeValueWithoutComma = 0;
-            EditText incomeValue = (EditText) findViewById(R.id.incomeInput);
-            if (incomeValue.length() == 0) {
-                Toast.makeText(this, "Please input value", Toast.LENGTH_LONG).show();
-            }
-            else {
-                if (incomeValue.getText().toString().contains(",")) {
-                    incomeValueWithoutComma = Integer.parseInt(incomeValue.getText().
-                            toString().replaceAll(",", ""));
-                }
-                else {
-                    incomeValueWithoutComma = Integer.parseInt(incomeValue.getText().toString());
-                }
-                DBHandler handler = new DBHandler(this);
-                Boolean dataExist = false;
-                DBContract.TABLE_EXPINCOME.insertIncomeData(handler.getWritableDatabase(),
-                        selectedMonth, incomeValueWithoutComma);
-                handler.close();
+            TextView incomeValue = (TextView) findViewById(R.id.incomeInput);
+
+                if (!incomeValue.getText().equals("0")) {
+                    if (incomeValue.getText().toString().contains(",")) {
+                        incomeValueWithoutComma = Integer.parseInt(incomeValue.getText().
+                                toString().replaceAll(",", ""));
+                    } else {
+                        incomeValueWithoutComma = Integer.parseInt(incomeValue.getText().toString());
+                    }
+                    DBHandler handler = new DBHandler(this);
+                    Boolean dataExist = false;
+                    DBContract.TABLE_EXPINCOME.insertIncomeData(handler.getWritableDatabase(),
+                            selectedMonth, incomeValueWithoutComma);
+                    handler.close();
+                    Toast.makeText(this, "You have input income :"  + incomeValue.getText() + " at " + selectedMonth, Toast.LENGTH_SHORT).show();
+
 //            dataExist = DBContract.TABLE_EXPINCOME.CheckDataIsExistOrNot(handler.getWritableDatabase(), selectedMonth);
 //            if(dataExist == true)
 //            {
@@ -99,11 +136,15 @@ public class IncomeRecorder extends AppCompatActivity   {
 //            else    {
 //                DBContract.TABLE_EXPINCOME.insertIncomeData(handler.getWritableDatabase(),selectedMonth,  Integer.parseInt(incomeValue.getText().toString()));
 //            }
-            }
+                }
+
+            view3.setVisibility(View.GONE);
+            view1.setVisibility(View.VISIBLE);
+            setContentView(view1);
         }
 
         public void getFormattedNumber()    {
-            final EditText incomeValue = (EditText) findViewById(R.id.incomeInput);
+            final TextView incomeValue = (TextView) findViewById(R.id.incomeInput);
             incomeValue.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -136,7 +177,7 @@ public class IncomeRecorder extends AppCompatActivity   {
                         formattedValue = "";
                     }
                     incomeValue.setText(formattedValue);
-                    incomeValue.setSelection(incomeValue.getText().length());
+                    //incomeValue.setSelection(incomeValue.getText().length());
                     incomeValue.addTextChangedListener(this);
                 }
             });
