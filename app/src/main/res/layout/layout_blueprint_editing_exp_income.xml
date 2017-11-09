@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/green">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Date :"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/selectedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/date"
+            android:layout_marginLeft="20sp"
+            android:layout_toEndOf="@+id/date"
+            android:text="date"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/expenditure"
+            android:layout_marginTop="20dp"
+            android:textSize="30sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Expenditure :"/>
+
+        <TextView
+            android:id="@+id/bluePrint_expValue"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:text="value"
+            android:textSize="30sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_alignBaseline="@+id/expenditure"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/expenditure"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp">
+
+        <TextView
+            android:id="@+id/income"
+            android:layout_marginTop="20dp"
+            android:textSize="30sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Income :"/>
+
+        <TextView
+            android:id="@+id/bluePrint_incomeValue"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:text="value"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp"
+            android:layout_alignBaseline="@+id/income"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/income"/>
+    </RelativeLayout>
+
+</LinearLayout>

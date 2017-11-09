@@ -100,7 +100,7 @@ public class ExpenditureRecorder extends AppCompatActivity {
 
             DBHandler handler = new DBHandler(this);
             DBContract.TABLE_EXPINCOME.insertExpData(handler.getWritableDatabase(),
-                    selectedMonth, expValueWithoutComma);
+                    selectedMonth, selectedDay, selectedYear, expValueWithoutComma);
             handler.close();
 
             Toast.makeText(this, "You have input expense :"  + expValue.getText()

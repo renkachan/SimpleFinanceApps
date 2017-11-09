@@ -35,4 +35,9 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, ReportGenerator.class);
         startActivity(i);
     }
+
+    public void openEdit(View v)  {
+        Intent i = new Intent(this, ReportEditor.class);
+        startActivity(i);
+    }
 }

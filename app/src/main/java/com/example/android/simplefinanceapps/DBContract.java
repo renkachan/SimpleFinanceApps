@@ -14,16 +14,16 @@ import java.util.List;
 
 public class DBContract {
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "simpleFinanceApps.db";
+    public static final String DATABASE_NAME = "financeReportings.db";
 
     private DBContract() {
     }
 
     public static final class TABLE_EXPINCOME implements BaseColumns {
-        public static final String TABLE_NAME = "financeReporting";
+        public static final String TABLE_NAME = "financeYearlyReports";
         public static final String COLUMN_MONTH = "month";
         public static final String COLUMN_YEAR = "year";
-        public static final String COLUMN_DAY = "day";
+        public static final String COLUMN_DATE_OF_MONTH = "dateOfMonth";
         public static final String COLUMN_INCOME = "incomePerMonth";
         public static final String COLUMN_EXPENDITURE = "expPerMonth";
 
@@ -31,27 +31,32 @@ public class DBContract {
                 "CREATE TABLE " + TABLE_NAME + "(" +
                         _ID + " INTEGER PRIMARY KEY, " +
                         COLUMN_MONTH + " TEXT, " +
-                        COLUMN_INCOME + " TEXT," +
+                        COLUMN_YEAR + "TEXT, " +
+                        COLUMN_DATE_OF_MONTH + "TEXT, " +
+                        COLUMN_INCOME + " TEXT, " +
                         COLUMN_EXPENDITURE + " TEXT )";
 
         public static final String DELETE_TABLE =
                 "DROP TABLE IF EXISTS " + TABLE_NAME;
 
-
         public static long insertIncomeData(SQLiteDatabase db,
-                                      String month,
+                                      String month, int dateOfMonth, int year,
                                       int income) {
             ContentValues values = new ContentValues();
             values.put(COLUMN_MONTH, month);
+            values.put(COLUMN_YEAR, year);
+            values.put(COLUMN_DATE_OF_MONTH, dateOfMonth);
             values.put(COLUMN_INCOME, income);
             return db.insert(TABLE_NAME, null, values);
         }
 
         public static long insertExpData(SQLiteDatabase db,
-                                            String month,
+                                            String month, int dateOfMonth, int year,
                                             int expenditure) {
             ContentValues values = new ContentValues();
             values.put(COLUMN_MONTH, month);
+            values.put(COLUMN_YEAR, year);
+            values.put(COLUMN_DATE_OF_MONTH, dateOfMonth);
             values.put(COLUMN_EXPENDITURE, expenditure);
             return db.insert(TABLE_NAME, null, values);
         }
@@ -71,26 +76,16 @@ public class DBContract {
         }
 
 
-        public static void deleteData(SQLiteDatabase db) {
+        public static void deleteTable(SQLiteDatabase db) {
             //db.delete(TABLE_NAME, selection, selectionArgs);
             db.execSQL("DELETE FROM " + TABLE_NAME);
         }
 
-//        public static boolean CheckDataIsExistOrNot(SQLiteDatabase db, String month) {
-//            String query = "Select * from " + TABLE_NAME + " where " + COLUMN_MONTH + " = " + month;
-//            Cursor cursor = db.rawQuery(query, null);
-//            if(cursor.getCount() <= 0)
-//            {
-//                cursor.close();
-//                return false;
-//            }
-//            cursor.close();
-//            return true;
-//        }
         public static ArrayList<MonthlyExpenditureIncome> getData(SQLiteDatabase db) {
-           Cursor cursor = db.rawQuery("SELECT month, SUM(incomePerMonth) as " +
-                   COLUMN_INCOME + ", " + "SUM(expPerMonth) as " + COLUMN_EXPENDITURE +
-                   " from financeReporting group by month" , null);
+            Cursor cursor = null;
+            cursor = db.rawQuery("SELECT month, dateOfMonth, year, SUM(incomePerMonth) as " +
+                    COLUMN_INCOME + ", " + "SUM(expPerMonth) as " + COLUMN_EXPENDITURE +
+                    " from financeYearlyReports group by month" , null);
 
             ArrayList<MonthlyExpenditureIncome> items = new ArrayList<>();
 
@@ -100,14 +95,18 @@ public class DBContract {
             }
 
             cursor.close();
+
             return items;
         }
 
         public static MonthlyExpenditureIncome addItem(Cursor cursor) {
             MonthlyExpenditureIncome financeData = new MonthlyExpenditureIncome(
                     cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MONTH)),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_DATE_OF_MONTH)),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_YEAR)),
                     cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_INCOME)),
                     cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_EXPENDITURE)));
+
             return financeData;
         }
     }

@@ -1,6 +1,5 @@
 package com.example.android.simplefinanceapps;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by robert.arifin on 09/10/2017.
@@ -53,7 +51,7 @@ public class ReportGenerator extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         DBHandler handler = new DBHandler(ReportGenerator.this);
-                        DBContract.TABLE_EXPINCOME.deleteData(handler.getWritableDatabase());
+                        DBContract.TABLE_EXPINCOME.deleteTable(handler.getWritableDatabase());
                         handler.close();
                         monthlyReport.clear();
                         adapter = new ReportGeneratorAdapter(

@@ -101,7 +101,7 @@ public class IncomeRecorder extends AppCompatActivity {
 
                 DBHandler handler = new DBHandler(this);
                 DBContract.TABLE_EXPINCOME.insertIncomeData(handler.getWritableDatabase(),
-                        selectedMonth, incomeValueWithoutComma);
+                        selectedMonth, selectedDay, selectedYear,incomeValueWithoutComma);
                 handler.close();
 
                 Toast.makeText(this, "You have input income :"  + incomeValue.getText()

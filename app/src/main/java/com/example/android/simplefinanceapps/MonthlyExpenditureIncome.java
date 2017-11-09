@@ -5,13 +5,15 @@ package com.example.android.simplefinanceapps;
  */
 
 public class MonthlyExpenditureIncome {
-    int income;
-    int expenditure;
+    int income, expenditure, year, dateOfMonth;
     String month;
 
-    public MonthlyExpenditureIncome(String month, int income, int expenditure )
+
+    public MonthlyExpenditureIncome(String month,int dateOfMonth, int year, int income, int expenditure )
     {
         this.month = month;
+        this.year = year;
+        this.dateOfMonth = dateOfMonth;
         this.income = income;
         this.expenditure = expenditure;
     }
@@ -24,6 +26,16 @@ public class MonthlyExpenditureIncome {
     public int getIncome()
     {
         return income;
+    }
+
+    public int getYear()
+    {
+        return year;
+    }
+
+    public int getDateOfMonth()
+    {
+        return dateOfMonth;
     }
 
     public String getMonth () {

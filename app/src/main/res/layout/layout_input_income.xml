@@ -8,8 +8,7 @@
     <CalendarView
         android:id="@+id/dateSelection"
         android:layout_width="match_parent"
-        android:layout_height="298dp"
-        android:selectedWeekBackgroundColor = "@color/amber">
+        android:layout_height="298dp">
     </CalendarView>
 
     <TextView

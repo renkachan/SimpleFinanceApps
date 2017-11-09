@@ -3,7 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name = "cyan">#00BCD4</color>
-    <color name = "amber">#FFC107</color>
+    <color name = "red">#EF5350</color>
     <color name = "orange">#E64A19</color>
     <color name ="indigo">#536DFE</color>
     <color name="colorAccent">#FF4081</color>
