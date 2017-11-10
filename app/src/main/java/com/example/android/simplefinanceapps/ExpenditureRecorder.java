@@ -37,17 +37,15 @@ public class ExpenditureRecorder extends AppCompatActivity {
         setContentView(view1);
 
         calendar = (CalendarView) findViewById(R.id.dateSelection);
-        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener()    {
+        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month,
-                                            int dayOfMonth)
-            {
+                                            int dayOfMonth) {
                 GregorianCalendar calendar = new GregorianCalendar(year, month, dayOfMonth);
                 selectedMonth = calendar.getDisplayName(Calendar.MONTH,
                         Calendar.LONG, Locale.getDefault());
                 selectedDay = dayOfMonth;
                 selectedYear = year;
-
             }
         });
 
@@ -66,7 +64,7 @@ public class ExpenditureRecorder extends AppCompatActivity {
         displayedText =  expValue.getText().toString();
         String buttonText = b.getText().toString();
 
-        if(displayedText.equals("")) {
+        if (displayedText.equals("")) {
             displayedText = buttonText;
         } else {
             displayedText += buttonText;
@@ -99,8 +97,8 @@ public class ExpenditureRecorder extends AppCompatActivity {
         }
 
             DBHandler handler = new DBHandler(this);
-            DBContract.TABLE_EXPINCOME.insertExpData(handler.getWritableDatabase(),
-                    selectedMonth, selectedDay, selectedYear, expValueWithoutComma);
+            DBContract.TABLE_EXPINCOME.insertExpData(handler.getWritableDatabase(), selectedDay,
+                    selectedMonth, selectedYear, expValueWithoutComma);
             handler.close();
 
             Toast.makeText(this, "You have input expense :"  + expValue.getText()
@@ -134,11 +132,15 @@ public class ExpenditureRecorder extends AppCompatActivity {
                 DecimalFormat formatter = new DecimalFormat("##,###,###");
 
                 if (expValue.getText().toString().contains(",")) {
-                    expValue.setText(expValue.getText().toString().replaceAll(",", ""));
+                    expValue.setText(expValue.getText().toString().
+                            replaceAll(",", ""));
                 }
+
                 if (expValue.getText().toString().contains(" ")) {
-                    expValue.setText(expValue.getText().toString().replaceAll(" ", ""));
+                    expValue.setText(expValue.getText().toString().
+                            replaceAll(" ", ""));
                 }
+
                 if (expValue.length()!= 0) {
                     formattedValue = formatter.format((Integer.parseInt(expValue.
                             getText().toString())));

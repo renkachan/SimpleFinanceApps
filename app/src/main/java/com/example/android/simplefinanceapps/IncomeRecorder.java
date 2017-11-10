@@ -66,7 +66,7 @@ public class IncomeRecorder extends AppCompatActivity {
             displayedText =  incomeValue.getText().toString();
             String buttonText = b.getText().toString();
 
-            if(displayedText.equals("")) {
+            if (displayedText.equals("")) {
                 displayedText = buttonText;
             } else {
                 displayedText += buttonText;
@@ -77,12 +77,12 @@ public class IncomeRecorder extends AppCompatActivity {
         public void removeNumber(View v) {
             TextView incomeValue = (TextView) findViewById(R.id.incomeInput);
 
-            if(!incomeValue.getText().equals("0"))
-            {
-                incomeValue.setText(incomeValue.getText().toString().substring(0,incomeValue.getText().length() - 1));
+            if (!incomeValue.getText().equals("0")) {
+                incomeValue.setText(incomeValue.getText().toString().substring(0,
+                        incomeValue.getText().length() - 1));
             }
-            if(incomeValue.length() == 0)
-            {
+
+            if (incomeValue.length() == 0) {
                 incomeValue.setText("0");
             }
         }
@@ -101,7 +101,7 @@ public class IncomeRecorder extends AppCompatActivity {
 
                 DBHandler handler = new DBHandler(this);
                 DBContract.TABLE_EXPINCOME.insertIncomeData(handler.getWritableDatabase(),
-                        selectedMonth, selectedDay, selectedYear,incomeValueWithoutComma);
+                        selectedDay, selectedMonth, selectedYear, incomeValueWithoutComma);
                 handler.close();
 
                 Toast.makeText(this, "You have input income :"  + incomeValue.getText()
@@ -111,7 +111,8 @@ public class IncomeRecorder extends AppCompatActivity {
                 Intent i = new Intent(this, MainActivity.class );
                 startActivity(i);
             } else {
-                Toast.makeText(this, "You haven't input anything",Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "You haven't input anything",
+                        Toast.LENGTH_LONG).show();
             }
         }
 
@@ -132,24 +133,24 @@ public class IncomeRecorder extends AppCompatActivity {
                 public void afterTextChanged(Editable s) {
                     incomeValue.removeTextChangedListener(this);
                     DecimalFormat  formatter = new DecimalFormat("##,###,###");
-                    if(incomeValue.getText().toString().contains(","))
-                    {
-                        incomeValue.setText(incomeValue.getText().toString().replaceAll(",", ""));
+                    if (incomeValue.getText().toString().contains(",")) {
+                        incomeValue.setText(incomeValue.getText().toString()
+                                .replaceAll(",", ""));
                     }
-                    if(incomeValue.getText().toString().contains(" "))
-                    {
-                        incomeValue.setText(incomeValue.getText().toString().replaceAll(" ", ""));
+
+                    if (incomeValue.getText().toString().contains(" ")) {
+                        incomeValue.setText(incomeValue.getText().toString()
+                                .replaceAll(" ", ""));
                     }
-                    if(incomeValue.length()!= 0)
-                    {
+                    if (incomeValue.length()!= 0) {
                         formattedValue = formatter.format((Integer.parseInt
                                 (incomeValue.getText().toString())));
                     }
-                    else    {
+                    else {
                         formattedValue = "";
                     }
+
                     incomeValue.setText(formattedValue);
-                    //incomeValue.setSelection(incomeValue.getText().length());
                     incomeValue.addTextChangedListener(this);
                 }
             });

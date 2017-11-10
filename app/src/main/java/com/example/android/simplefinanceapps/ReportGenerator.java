@@ -24,7 +24,8 @@ public class ReportGenerator extends AppCompatActivity {
         super.onCreate(savedInstantState);
         setContentView(R.layout.layout_report);
         monthlyReport = retrieveReportFromDb();
-         adapter = new ReportGeneratorAdapter(
+
+        adapter = new ReportGeneratorAdapter(
                 this, R.layout.layout_blueprint_report, monthlyReport);
         listView = (ListView) findViewById(R.id.monthlyReport);
         listView.setAdapter(adapter);
@@ -33,8 +34,9 @@ public class ReportGenerator extends AppCompatActivity {
     private ArrayList<MonthlyExpenditureIncome> retrieveReportFromDb() {
         ArrayList<MonthlyExpenditureIncome>  reportFromDb = new ArrayList<>();
         DBHandler handler = new DBHandler(this);
-        reportFromDb = DBContract.TABLE_EXPINCOME.getData(handler.getWritableDatabase());
+        reportFromDb = DBContract.TABLE_EXPINCOME.getMonthlyData(handler.getWritableDatabase());
         handler.close();
+
         return reportFromDb;
     }
 

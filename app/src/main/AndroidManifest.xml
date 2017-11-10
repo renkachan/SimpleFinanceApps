@@ -19,6 +19,7 @@
         <activity android:name=".ExpenditureRecorder"></activity>
         <activity android:name=".ReportGenerator"></activity>
         <activity android:name=".ReportEditor"></activity>
+        <activity android:name=".IncomeEditor"></activity>
     </application>
 
 </manifest>

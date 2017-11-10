@@ -50,7 +50,7 @@ public class ReportEditorAdapter extends ArrayAdapter<MonthlyExpenditureIncome> 
                 viewHolder = (ViewHolder) convertView.getTag();
             }
 
-            viewHolder.date.setText(data.get(position).getDateOfMonth() + " " + data.get(position).getMonth() + " " + data.get(position).getYear());
+            viewHolder.date.setText(  data.get(position).getDate() + " " + data.get(position).getMonth() + " " + data.get(position).getYear());
             viewHolder.income.setText(String.format("%d", data.get(position).getIncome()));
             viewHolder.expenditure.setText(String.format("%d", data.
                                             get(position).getExpenditure()));
