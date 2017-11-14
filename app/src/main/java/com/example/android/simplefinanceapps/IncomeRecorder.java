@@ -24,14 +24,15 @@ import java.util.TimeZone;
 
 public class IncomeRecorder extends AppCompatActivity {
     View view1;
-    String formattedValue, selectedMonth;
+    String formattedValue;
     CalendarView calendar;
-    int selectedDay, selectedYear;
+    String selectedMonthInWords;
+    int selectedMonth, selectedDay, selectedYear;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            selectedMonth = "";
+            selectedMonthInWords = "";
            // view1 = getLayoutInflater().inflate(R.layout.layout_income, null);
             view1 = getLayoutInflater().inflate(R.layout.layout_input_income, null);
             setContentView(view1);
@@ -43,8 +44,9 @@ public class IncomeRecorder extends AppCompatActivity {
                                                 int dayOfMonth)
                 {
                     GregorianCalendar calendar = new GregorianCalendar(year, month, dayOfMonth);
-                    selectedMonth = calendar.getDisplayName(Calendar.MONTH,
+                    selectedMonthInWords = calendar.getDisplayName(Calendar.MONTH,
                             Calendar.LONG, Locale.getDefault());
+                    selectedMonth = month;
                     selectedDay = dayOfMonth;
                     selectedYear = year;
 
@@ -52,7 +54,8 @@ public class IncomeRecorder extends AppCompatActivity {
             });
 
             Calendar c = Calendar.getInstance(TimeZone.getDefault());
-            selectedMonth = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+            selectedMonthInWords = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+            selectedMonth = c.get(Calendar.MONTH);
             selectedDay = c.get(Calendar.DAY_OF_MONTH);
             selectedYear = c.get(Calendar.YEAR);
 
@@ -77,7 +80,8 @@ public class IncomeRecorder extends AppCompatActivity {
         public void removeNumber(View v) {
             TextView incomeValue = (TextView) findViewById(R.id.incomeInput);
 
-            if (!incomeValue.getText().equals("0")) {
+            if (!incomeValue.getText().equals("0"))
+            {
                 incomeValue.setText(incomeValue.getText().toString().substring(0,
                         incomeValue.getText().length() - 1));
             }
@@ -88,6 +92,10 @@ public class IncomeRecorder extends AppCompatActivity {
         }
 
         public void addThisMonthIncome(View v) {
+            Calendar c = Calendar.getInstance();
+            c.set(selectedYear, selectedMonth, selectedDay);
+            long timeInMillis = c.getTimeInMillis();
+
             int incomeValueWithoutComma = 0;
             TextView incomeValue = (TextView) findViewById(R.id.incomeInput);
 
@@ -101,11 +109,11 @@ public class IncomeRecorder extends AppCompatActivity {
 
                 DBHandler handler = new DBHandler(this);
                 DBContract.TABLE_EXPINCOME.insertIncomeData(handler.getWritableDatabase(),
-                        selectedDay, selectedMonth, selectedYear, incomeValueWithoutComma);
+                        timeInMillis, incomeValueWithoutComma, "INCOME");
                 handler.close();
 
                 Toast.makeText(this, "You have input income :"  + incomeValue.getText()
-                                + " at " + "" + selectedDay + " " + selectedMonth + " "
+                                + " at " + "" + selectedDay + " " + selectedMonthInWords + " "
                                 + selectedYear, Toast.LENGTH_SHORT).show();
 
                 Intent i = new Intent(this, MainActivity.class );
@@ -133,16 +141,16 @@ public class IncomeRecorder extends AppCompatActivity {
                 public void afterTextChanged(Editable s) {
                     incomeValue.removeTextChangedListener(this);
                     DecimalFormat  formatter = new DecimalFormat("##,###,###");
-                    if (incomeValue.getText().toString().contains(",")) {
+                    if(incomeValue.getText().toString().contains(",")) {
                         incomeValue.setText(incomeValue.getText().toString()
                                 .replaceAll(",", ""));
                     }
 
-                    if (incomeValue.getText().toString().contains(" ")) {
+                    if(incomeValue.getText().toString().contains(" ")) {
                         incomeValue.setText(incomeValue.getText().toString()
                                 .replaceAll(" ", ""));
                     }
-                    if (incomeValue.length()!= 0) {
+                    if(incomeValue.length()!= 0) {
                         formattedValue = formatter.format((Integer.parseInt
                                 (incomeValue.getText().toString())));
                     }

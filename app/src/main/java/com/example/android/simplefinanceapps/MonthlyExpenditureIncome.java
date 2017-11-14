@@ -5,40 +5,30 @@ package com.example.android.simplefinanceapps;
  */
 
 public class MonthlyExpenditureIncome {
-    int income, expenditure, year, date;
-    String month;
+    int amount;
+    long date;
+    String category;
 
 
-    public MonthlyExpenditureIncome(int date, String month, int year, int income, int expenditure )
+    public MonthlyExpenditureIncome(long date, int amount, String category)
     {
-        this.month = month;
-        this.year = year;
         this.date = date;
-        this.income = income;
-        this.expenditure = expenditure;
+        this.amount = amount;
+        this.category = category;
     }
 
-    public int getExpenditure()
+    public int getAmount()
     {
-        return expenditure;
+        return amount;
     }
 
-    public int getIncome()
-    {
-        return income;
-    }
-
-    public int getYear()
-    {
-        return year;
-    }
-
-    public int getDate()
+    public long getDate()
     {
         return date;
     }
 
-    public String getMonth () {
-        return month;
+
+    public String getCategory () {
+        return category;
     }
 }

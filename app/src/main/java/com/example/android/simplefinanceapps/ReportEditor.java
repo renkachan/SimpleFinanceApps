@@ -35,11 +35,11 @@ public class ReportEditor extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 MonthlyExpenditureIncome item  = (MonthlyExpenditureIncome) parent.getItemAtPosition(position);
 
-                Intent i = new Intent(ReportEditor.this, IncomeEditor.class);
-                i.putExtra("date", item.getDate());
-                i.putExtra("month", item.getMonth());
-                i.putExtra("year", item.getYear());
-                startActivity(i);
+//                Intent i = new Intent(ReportEditor.this, IncomeEditor.class);
+//                i.putExtra("date", item.getDate());
+//                i.putExtra("amount", item.getAmount());
+//                i.putExtra("category", item.getCategory());
+//                startActivity(i);
             }
         });
     }
