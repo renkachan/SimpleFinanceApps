@@ -4,8 +4,14 @@
     android:layout_height="match_parent"
     android:background="@color/lime">
 
+    <CalendarView
+        android:id="@+id/dateSelection"
+        android:layout_width="match_parent"
+        android:layout_height="298dp">
+
+    </CalendarView>
+
     <TextView
-        android:layout_marginTop="150dp"
         android:id="@+id/inputField"
         android:layout_gravity="right"
         android:text="0"
@@ -17,7 +23,6 @@
         android:textSize="35sp"/>
 
     <RelativeLayout
-        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -127,7 +132,7 @@
                 android:textSize="40sp"
                 android:textColor="@color/blueGrey"
                 android:background="@android:color/transparent"
-                android:onClick="updateIncome"/>
+                android:onClick="updateValue"/>
         </GridLayout>
     </RelativeLayout>
 

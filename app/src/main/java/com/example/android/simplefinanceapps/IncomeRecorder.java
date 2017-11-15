@@ -1,6 +1,5 @@
 package com.example.android.simplefinanceapps;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -107,10 +106,13 @@ public class IncomeRecorder extends AppCompatActivity {
                     incomeValueWithoutComma = Integer.parseInt(incomeValue.getText().toString());
                 }
 
-                DBHandler handler = new DBHandler(this);
-                DBContract.TABLE_EXPINCOME.insertIncomeData(handler.getWritableDatabase(),
-                        timeInMillis, incomeValueWithoutComma, "INCOME");
-                handler.close();
+                FinanceModel record = new FinanceModel();
+                record.setAmount(incomeValueWithoutComma);
+                record.setDate(timeInMillis);
+                record.setCategory("INCOME");
+
+                SQLiteHelper sQLiteHelper = new SQLiteHelper(this);
+                sQLiteHelper.insertRecord(record);
 
                 Toast.makeText(this, "You have input income :"  + incomeValue.getText()
                                 + " at " + "" + selectedDay + " " + selectedMonthInWords + " "
@@ -118,10 +120,10 @@ public class IncomeRecorder extends AppCompatActivity {
 
                 Intent i = new Intent(this, MainActivity.class );
                 startActivity(i);
-            } else {
-                Toast.makeText(this, "You haven't input anything",
-                        Toast.LENGTH_LONG).show();
-            }
+                } else {
+                    Toast.makeText(this, "You haven't input anything",
+                            Toast.LENGTH_LONG).show();
+                }
         }
 
         public void getFormattedNumber()    {

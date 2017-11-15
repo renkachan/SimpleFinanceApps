@@ -15,8 +15,8 @@
 // * Created by robert.arifin on 10/10/2017.
 // */
 //
-//public class ReportGeneratorAdapter extends ArrayAdapter<MonthlyExpenditureIncome> {
-//    private ArrayList<MonthlyExpenditureIncome> monthlyData = new ArrayList<>();
+//public class ReportGeneratorAdapter extends ArrayAdapter<FinanceModel> {
+//    private ArrayList<FinanceModel> monthlyData = new ArrayList<>();
 //
 //    private static class ViewHolder {
 //        private TextView month, income, expenditure;
@@ -24,7 +24,7 @@
 //    }
 //
 //    public ReportGeneratorAdapter(Context context, int resource,
-//                                  ArrayList<MonthlyExpenditureIncome> item)
+//                                  ArrayList<FinanceModel> item)
 //    {
 //        super(context, resource, item);
 //        monthlyData = item;

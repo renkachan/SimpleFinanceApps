@@ -26,10 +26,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-//    public void openExpenditure (View v) {
-//        Intent i = new Intent(this, ExpenditureRecorder.class);
-//        startActivity(i);
-//    }
+    public void openExpenditure (View v) {
+        Intent i = new Intent(this, ExpenditureRecorder.class);
+        startActivity(i);
+    }
 
 //    public void openReport(View v) {
 //        Intent i = new Intent(this, ReportGenerator.class);

@@ -1,7 +1,9 @@
 package com.example.android.simplefinanceapps;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,7 +16,7 @@ import java.util.ArrayList;
  */
 
 public class ReportEditor extends AppCompatActivity {
-    ArrayList<MonthlyExpenditureIncome> reports = new ArrayList<>();
+    ArrayList<FinanceModel> reports = new ArrayList<>();
     ReportEditorAdapter adapter;
     ListView listView;
 
@@ -22,33 +24,66 @@ public class ReportEditor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstantState) {
         super.onCreate(savedInstantState);
         setContentView(R.layout.layout_editing_exp_income);
-        reports = retrieveReportFromDb();
+        retrieveReportFromDb();
+
+    }
+
+    private void retrieveReportFromDb() {
+        SQLiteHelper sqLiteHelper = new SQLiteHelper(this);
 
         adapter = new ReportEditorAdapter(
-                this, R.layout.layout_blueprint_editing_exp_income, reports);
+                this, R.layout.layout_blueprint_editing_exp_income,
+                sqLiteHelper.getAllRecords());
 
         listView = (ListView) findViewById(R.id.dailyReport);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                MonthlyExpenditureIncome item  = (MonthlyExpenditureIncome) parent.getItemAtPosition(position);
+                FinanceModel item  = (FinanceModel) parent.getItemAtPosition(position);
 
-//                Intent i = new Intent(ReportEditor.this, IncomeEditor.class);
-//                i.putExtra("date", item.getDate());
-//                i.putExtra("amount", item.getAmount());
-//                i.putExtra("category", item.getCategory());
-//                startActivity(i);
+                Intent i = new Intent(ReportEditor.this, IncomeEditor.class);
+                i.putExtra("ID", item.getID());
+                i.putExtra("date", item.getDate());
+                i.putExtra("category", item.getCategory());
+                startActivity(i);
             }
         });
-    }
 
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View arg1,
+                                           int position, long id) {
 
-    private ArrayList<MonthlyExpenditureIncome> retrieveReportFromDb() {
-        ArrayList<MonthlyExpenditureIncome>  reportFromDb = new ArrayList<>();
-        DBHandler handler = new DBHandler(this);
-        return DBContract.TABLE_EXPINCOME.getData(handler.getWritableDatabase());
+                final FinanceModel item = (FinanceModel) parent.getItemAtPosition(position);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(ReportEditor.this);
+                builder.setTitle("Delete record")
+                        .setMessage("Delete this record?")
+                        .setPositiveButton(android.R.string.yes, new
+                                DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                FinanceModel record = new FinanceModel();
+                                record.setID(item.getID());
+                                SQLiteHelper sqLiteHelper = new SQLiteHelper
+                                        (ReportEditor.this);
+                                sqLiteHelper.deleteRecord(record);
+                                retrieveReportFromDb();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.
+                                OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+
+                return true;
+            }
+        });
     }
 
     public void backToMainMenu(View v)  {

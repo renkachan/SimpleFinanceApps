@@ -44,7 +44,7 @@
             android:text="Expenditure :"/>
 
         <TextView
-            android:id="@+id/bluePrint_expValue"
+            android:id="@+id/bluePrint_amountValue"
             android:layout_width="wrap_content"
             android:layout_marginLeft="20sp"
             android:text="month"
@@ -70,7 +70,7 @@
             android:text="Income :"/>
 
         <TextView
-            android:id="@+id/bluePrint_incomeValue"
+            android:id="@+id/bluePrint_category"
             android:layout_width="wrap_content"
             android:layout_marginLeft="20sp"
             android:text="month"

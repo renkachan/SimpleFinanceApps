@@ -15,7 +15,7 @@
 // */
 //
 //public class ReportGenerator extends AppCompatActivity {
-//    ArrayList<MonthlyExpenditureIncome> monthlyReport = new ArrayList<>();
+//    ArrayList<FinanceModel> monthlyReport = new ArrayList<>();
 //    ReportGeneratorAdapter adapter;
 //    ListView listView;
 //
@@ -31,9 +31,9 @@
 //        listView.setAdapter(adapter);
 //    }
 //
-//    private ArrayList<MonthlyExpenditureIncome> retrieveReportFromDb() {
-//        ArrayList<MonthlyExpenditureIncome>  reportFromDb = new ArrayList<>();
-//        DBHandler handler = new DBHandler(this);
+//    private ArrayList<FinanceModel> retrieveReportFromDb() {
+//        ArrayList<FinanceModel>  reportFromDb = new ArrayList<>();
+//        SQLiteHelper handler = new SQLiteHelper(this);
 //        reportFromDb = DBContract.TABLE_EXPINCOME.getMonthlyData(handler.getWritableDatabase());
 //        handler.close();
 //
@@ -52,7 +52,7 @@
 //                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 //                    @Override
 //                    public void onClick(DialogInterface dialog, int which) {
-//                        DBHandler handler = new DBHandler(ReportGenerator.this);
+//                        SQLiteHelper handler = new SQLiteHelper(ReportGenerator.this);
 //                        DBContract.TABLE_EXPINCOME.deleteTable(handler.getWritableDatabase());
 //                        handler.close();
 //                        monthlyReport.clear();
