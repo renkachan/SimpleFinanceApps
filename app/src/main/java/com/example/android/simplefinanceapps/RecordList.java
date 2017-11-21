@@ -15,15 +15,15 @@ import java.util.ArrayList;
  * Created by robert.arifin on 09/11/2017.
  */
 
-public class ReportEditor extends AppCompatActivity {
+public class RecordList extends AppCompatActivity {
     ArrayList<FinanceModel> reports = new ArrayList<>();
-    ReportEditorAdapter adapter;
+    RecordListAdapter adapter;
     ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstantState) {
         super.onCreate(savedInstantState);
-        setContentView(R.layout.layout_editing_exp_income);
+        setContentView(R.layout.layout_record);
         retrieveReportFromDb();
 
     }
@@ -31,8 +31,8 @@ public class ReportEditor extends AppCompatActivity {
     private void retrieveReportFromDb() {
         SQLiteHelper sqLiteHelper = new SQLiteHelper(this);
 
-        adapter = new ReportEditorAdapter(
-                this, R.layout.layout_blueprint_editing_exp_income,
+        adapter = new RecordListAdapter(
+                this, R.layout.layout_blueprint_record,
                 sqLiteHelper.getAllRecords());
 
         listView = (ListView) findViewById(R.id.dailyReport);
@@ -42,7 +42,7 @@ public class ReportEditor extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 FinanceModel item  = (FinanceModel) parent.getItemAtPosition(position);
 
-                Intent i = new Intent(ReportEditor.this, IncomeEditor.class);
+                Intent i = new Intent(RecordList.this, RecordEditor.class);
                 i.putExtra("ID", item.getID());
                 i.putExtra("date", item.getDate());
                 i.putExtra("category", item.getCategory());
@@ -57,7 +57,7 @@ public class ReportEditor extends AppCompatActivity {
 
                 final FinanceModel item = (FinanceModel) parent.getItemAtPosition(position);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(ReportEditor.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(RecordList.this);
                 builder.setTitle("Delete record")
                         .setMessage("Delete this record?")
                         .setPositiveButton(android.R.string.yes, new
@@ -67,7 +67,7 @@ public class ReportEditor extends AppCompatActivity {
                                 FinanceModel record = new FinanceModel();
                                 record.setID(item.getID());
                                 SQLiteHelper sqLiteHelper = new SQLiteHelper
-                                        (ReportEditor.this);
+                                        (RecordList.this);
                                 sqLiteHelper.deleteRecord(record);
                                 retrieveReportFromDb();
                             }

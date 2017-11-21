@@ -1,6 +1,5 @@
 package com.example.android.simplefinanceapps;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,7 @@ import java.util.Date;
  * Created by robert.arifin on 09/11/2017.
  */
 
-public class ReportEditorAdapter extends ArrayAdapter<FinanceModel> {
+public class RecordListAdapter extends ArrayAdapter<FinanceModel> {
         private ArrayList<FinanceModel> data = new ArrayList<>();
 
         private static class ViewHolder {
@@ -24,8 +23,8 @@ public class ReportEditorAdapter extends ArrayAdapter<FinanceModel> {
 
         }
 
-        public ReportEditorAdapter(Context context, int resource,
-                                      ArrayList<FinanceModel> item)
+        public RecordListAdapter(Context context, int resource,
+                                 ArrayList<FinanceModel> item)
         {
             super(context, resource, item);
             data = item;
@@ -37,7 +36,7 @@ public class ReportEditorAdapter extends ArrayAdapter<FinanceModel> {
 
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(
-                        R.layout.layout_blueprint_editing_exp_income, null);
+                        R.layout.layout_blueprint_record, null);
                 viewHolder = new ViewHolder();
                 viewHolder.date = (TextView)convertView.findViewById(R.id.selectedDate);
                 viewHolder.amount = (TextView) convertView.findViewById

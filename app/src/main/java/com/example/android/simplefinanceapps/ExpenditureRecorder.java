@@ -77,7 +77,8 @@ public class ExpenditureRecorder extends AppCompatActivity {
         TextView expValue = (TextView) findViewById(R.id.expInput);
 
         if (!expValue.getText().equals("0")) {
-            expValue.setText(expValue.getText().toString().substring(0,expValue.getText().length() - 1));
+            expValue.setText(expValue.getText().toString().
+                    substring(0,expValue.getText().length() - 1));
         }
 
         if (expValue.length() == 0) {
@@ -88,12 +89,13 @@ public class ExpenditureRecorder extends AppCompatActivity {
     public void addThisMonthExpenditure(View v) {
         int expValueWithoutComma = 0;
         TextView expValue = (TextView) findViewById(R.id.expInput);
+
         Calendar c = Calendar.getInstance();
         c.set(selectedYear, selectedMonth, selectedDay);
         long timeInMillis = c.getTimeInMillis();
 
         if (!expValue.getText().equals("0")) {
-            if(expValue.getText().toString().contains(",")) {
+            if (expValue.getText().toString().contains(",")) {
                 expValueWithoutComma = Integer.parseInt(expValue.getText().
                         toString().replaceAll(",", ""));
             } else {

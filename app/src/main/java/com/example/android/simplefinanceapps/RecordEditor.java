@@ -18,7 +18,7 @@ import java.util.Date;
  * Created by robert.arifin on 10/11/2017.
  */
 
-public class IncomeEditor extends AppCompatActivity {
+public class RecordEditor extends AppCompatActivity {
     String  formattedValue, category;
     int id;
     long date;
@@ -26,7 +26,7 @@ public class IncomeEditor extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_editing_field);
+        setContentView(R.layout.layout_record_editor);
 
         Intent intent = getIntent();
         id = intent.getIntExtra("ID", 0);
@@ -89,7 +89,7 @@ public class IncomeEditor extends AppCompatActivity {
             Toast.makeText(this, "You have updated " + category + " :"
                     + incomeValue.getText() + " at " + dateString, Toast.LENGTH_SHORT).show();
 
-            Intent i = new Intent(this, ReportEditor.class);
+            Intent i = new Intent(this, RecordList.class);
             startActivity(i);
         } else {
             Toast.makeText(this, "You haven't change anything",Toast.LENGTH_LONG).show();

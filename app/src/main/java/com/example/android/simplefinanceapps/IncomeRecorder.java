@@ -32,7 +32,6 @@ public class IncomeRecorder extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             selectedMonthInWords = "";
-           // view1 = getLayoutInflater().inflate(R.layout.layout_income, null);
             view1 = getLayoutInflater().inflate(R.layout.layout_input_income, null);
             setContentView(view1);
 
@@ -53,7 +52,8 @@ public class IncomeRecorder extends AppCompatActivity {
             });
 
             Calendar c = Calendar.getInstance(TimeZone.getDefault());
-            selectedMonthInWords = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+            selectedMonthInWords = c.getDisplayName(Calendar.MONTH,
+                    Calendar.LONG, Locale.getDefault());
             selectedMonth = c.get(Calendar.MONTH);
             selectedDay = c.get(Calendar.DAY_OF_MONTH);
             selectedYear = c.get(Calendar.YEAR);
