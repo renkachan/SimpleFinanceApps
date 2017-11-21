@@ -72,7 +72,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         ArrayList<FinanceModel> records = new ArrayList<FinanceModel>();
         Cursor cursor = database.rawQuery("SELECT " + COLUMN_ID + ", " + COLUMN_DATE + ", " +
                 COLUMN_AMOUNT + ", " + COLUMN_CATEGORY +
-                " from financeYearlyReports" , null);
+                " from financeYearlyReports order by " +COLUMN_DATE + " ASC" , null);
 
         if (cursor.getCount() > 0) {
             for (int i = 0; i < cursor.getCount(); i++) {

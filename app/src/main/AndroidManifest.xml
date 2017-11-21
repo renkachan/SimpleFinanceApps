@@ -19,6 +19,9 @@
         <activity android:name=".ExpenditureRecorder"></activity>
         <activity android:name=".RecordList"></activity>
         <activity android:name=".RecordEditor"></activity>
+        <activity android:name=".ReportGenerator"
+            android:screenOrientation="landscape">
+        </activity>
     </application>
 
 </manifest>
