@@ -6,19 +6,12 @@
     android:background="@color/green">
 
     <ListView
-        android:id="@+id/monthlyReport"
+        android:id="@+id/dailyReport"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:padding="20dp">
 
     </ListView>
-
-    <Button
-        android:onClick="deleteAllReport"
-        android:text="Delete all"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"/>
 
     <Button
         android:layout_marginTop="20dp"

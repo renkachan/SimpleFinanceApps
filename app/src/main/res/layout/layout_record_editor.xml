@@ -1,25 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/red">
+    android:background="@color/lime">
 
     <CalendarView
         android:id="@+id/dateSelection"
         android:layout_width="match_parent"
         android:layout_height="298dp">
+
     </CalendarView>
 
     <TextView
-        android:id="@+id/expInput"
+        android:id="@+id/inputField"
         android:layout_gravity="right"
         android:text="0"
+        android:maxLength="11"
+        android:textColor="@color/blueGrey"
         android:layout_marginRight="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxLength="11"
-        android:textColor="@color/blueGrey"
         android:textSize="35sp"/>
 
     <RelativeLayout
@@ -30,7 +30,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
             android:columnCount="3">
 
             <Button android:text="1"
@@ -133,7 +132,7 @@
                 android:textSize="40sp"
                 android:textColor="@color/blueGrey"
                 android:background="@android:color/transparent"
-                android:onClick="addThisMonthExpenditure"/>
+                android:onClick="updateValue"/>
         </GridLayout>
     </RelativeLayout>
 

@@ -2,23 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/green">
+
+    <CalendarView
+        android:id="@+id/dateSelection"
+        android:layout_width="match_parent"
+        android:layout_height="298dp">
+    </CalendarView>
 
     <TextView
-        android:layout_marginTop="20dp"
-        android:id="@+id/incomeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:text="Add income"
-        android:textSize="20sp" />
-
-    <TextView
-        android:layout_marginTop="40dp"
         android:id="@+id/incomeInput"
         android:layout_gravity="right"
         android:text="0"
         android:maxLength="11"
+        android:textColor="@color/blueGrey"
         android:layout_marginRight="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,8 +24,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <GridLayout
             android:layout_width="wrap_content"
@@ -38,91 +35,103 @@
 
             <Button android:text="1"
                 android:onClick= "inputTheNumber"
-                android:layout_height="100dp"
-                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_width="110dp"
                 android:textSize="40sp"
+                android:textColor="@color/blueGrey"
                 android:background="@android:color/transparent"/>
 
             <Button android:text="2"
-                android:layout_height="100dp"
-                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_width="110dp"
                 android:textSize="40sp"
                 android:onClick= "inputTheNumber"
+                android:textColor="@color/blueGrey"
                 android:background="@android:color/transparent"/>
 
             <Button
                 android:text="3"
-                android:layout_height="100dp"
-                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_width="110dp"
                 android:textSize="40sp"
                 android:onClick= "inputTheNumber"
+                android:textColor="@color/blueGrey"
                 android:background="@android:color/transparent"/>
 
             <Button
                 android:text="4"
-                android:layout_height="100dp"
-                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_width="110dp"
                 android:textSize="40sp"
                 android:onClick= "inputTheNumber"
+                android:textColor="@color/blueGrey"
                 android:background="@android:color/transparent"/>
 
             <Button
                 android:text="5"
-                android:layout_height="100dp"
-                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_width="110dp"
                 android:textSize="40sp"
                 android:onClick= "inputTheNumber"
+                android:textColor="@color/blueGrey"
                 android:background="@android:color/transparent"/>
 
             <Button android:text="6"
-                android:layout_height="100dp"
-                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_width="110dp"
                 android:textSize="40sp"
                 android:onClick= "inputTheNumber"
+                android:textColor="@color/blueGrey"
                 android:background="@android:color/transparent"/>
 
             <Button
                 android:text="7"
                 android:onClick= "inputTheNumber"
-                android:layout_height="100dp"
-                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_width="110dp"
                 android:textSize="40sp"
+                android:textColor="@color/blueGrey"
                 android:background="@android:color/transparent"/>
 
             <Button
                 android:text="8"
-                android:layout_height="100dp"
-                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_width="110dp"
                 android:textSize="40sp"
                 android:background="@android:color/transparent"
+                android:textColor="@color/blueGrey"
                 android:onClick= "inputTheNumber"/>
 
             <Button
                 android:text="9"
-                android:layout_height="100dp"
-                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_width="110dp"
                 android:textSize="40sp"
                 android:background="@android:color/transparent"
+                android:textColor="@color/blueGrey"
                 android:onClick= "inputTheNumber"/>
 
             <Button android:text="\u232b"
-                android:layout_height="100dp"
-                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_width="110dp"
                 android:textSize="40sp"
+                android:textColor="@color/blueGrey"
                 android:background="@android:color/transparent"
                 android:onClick="removeNumber"/>
             <Button
                 android:text="0"
-                android:layout_height="100dp"
-                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_width="110dp"
                 android:textSize="40sp"
+                android:textColor="@color/blueGrey"
                 android:background="@android:color/transparent"
                 android:onClick= "inputTheNumber"/>
 
             <Button android:text="\u2713"
-                android:layout_height="100dp"
-                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_width="110dp"
                 android:textSize="40sp"
+                android:textColor="@color/blueGrey"
                 android:background="@android:color/transparent"
                 android:onClick="addThisMonthIncome"/>
         </GridLayout>

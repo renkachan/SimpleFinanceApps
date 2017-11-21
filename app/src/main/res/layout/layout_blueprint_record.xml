@@ -10,24 +10,24 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/month"
-            android:layout_marginTop="20dp"
-            android:textSize="30sp"
-            android:textColor="@color/colorPrimaryDark"
+            android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Month :"/>
+            android:layout_marginTop="20dp"
+            android:text="Date :"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp" />
 
         <TextView
-            android:id="@+id/selectedMonth"
+            android:id="@+id/selectedDate"
             android:layout_width="wrap_content"
-            android:layout_marginLeft="20sp"
-            android:text="month"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="30sp"
-            android:layout_alignBaseline="@+id/month"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/month"/>
+            android:layout_alignBaseline="@+id/date"
+            android:layout_marginLeft="20sp"
+            android:layout_toEndOf="@+id/date"
+            android:text="date"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -35,24 +35,24 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/expenditure"
+            android:id="@+id/amount"
             android:layout_marginTop="20dp"
             android:textSize="30sp"
             android:textColor="@color/colorPrimaryDark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Expenditure :"/>
+            android:text="Amount :"/>
 
         <TextView
             android:id="@+id/bluePrint_amountValue"
             android:layout_width="wrap_content"
             android:layout_marginLeft="20sp"
-            android:text="month"
+            android:text="value"
             android:textSize="30sp"
             android:textColor="@color/colorPrimaryDark"
-            android:layout_alignBaseline="@+id/expenditure"
+            android:layout_alignBaseline="@+id/amount"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/expenditure"/>
+            android:layout_toEndOf="@+id/amount"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -61,24 +61,24 @@
         android:layout_marginBottom="40dp">
 
         <TextView
-            android:id="@+id/income"
+            android:id="@+id/categoryText"
             android:layout_marginTop="20dp"
             android:textSize="30sp"
             android:textColor="@color/colorPrimaryDark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Income :"/>
+            android:text="Category :"/>
 
         <TextView
             android:id="@+id/bluePrint_category"
             android:layout_width="wrap_content"
             android:layout_marginLeft="20sp"
-            android:text="month"
+            android:text="value"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="30sp"
-            android:layout_alignBaseline="@+id/income"
+            android:layout_alignBaseline="@+id/categoryText"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/income"/>
+            android:layout_toEndOf="@+id/categoryText"/>
     </RelativeLayout>
 
 </LinearLayout>

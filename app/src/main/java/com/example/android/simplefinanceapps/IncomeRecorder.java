@@ -15,31 +15,26 @@ import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Created by robert.arifin on 09/10/2017.
  */
 
-public class IncomeRecorder extends AppCompatActivity   {
-    View view1, view2, view3;
-    String formattedValue, selectedMonth;
+public class IncomeRecorder extends AppCompatActivity {
+    View view1;
+    String formattedValue;
     CalendarView calendar;
-    int selectedDay, selectedYear;
+    String selectedMonthInWords;
+    int selectedMonth, selectedDay, selectedYear;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            selectedMonth = "";
-            view1 = getLayoutInflater().inflate(R.layout.layout_income, null);
-            view2 = getLayoutInflater().inflate(R.layout.layout_calendar, null);
-            view3 = getLayoutInflater().inflate(R.layout.layout_input_income, null);
+            selectedMonthInWords = "";
+            view1 = getLayoutInflater().inflate(R.layout.layout_input_income, null);
             setContentView(view1);
-        }
 
-        public  void selectDay(View v)  {
-            view1.setVisibility(View.GONE);
-            view2.setVisibility(View.VISIBLE);
-            setContentView(view2);
             calendar = (CalendarView) findViewById(R.id.dateSelection);
             calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener()    {
                 @Override
@@ -47,100 +42,88 @@ public class IncomeRecorder extends AppCompatActivity   {
                                                 int dayOfMonth)
                 {
                     GregorianCalendar calendar = new GregorianCalendar(year, month, dayOfMonth);
-                    selectedMonth = calendar.getDisplayName(Calendar.MONTH,
-                            Calendar.LONG, Locale.US);
+                    selectedMonthInWords = calendar.getDisplayName(Calendar.MONTH,
+                            Calendar.LONG, Locale.getDefault());
+                    selectedMonth = month;
                     selectedDay = dayOfMonth;
                     selectedYear = year;
 
                 }
             });
 
+            Calendar c = Calendar.getInstance(TimeZone.getDefault());
+            selectedMonthInWords = c.getDisplayName(Calendar.MONTH,
+                    Calendar.LONG, Locale.getDefault());
+            selectedMonth = c.get(Calendar.MONTH);
+            selectedDay = c.get(Calendar.DAY_OF_MONTH);
+            selectedYear = c.get(Calendar.YEAR);
 
+            getFormattedNumber();
         }
 
-        public void confirmDateSelection(View v)    {
-            view2.setVisibility(View.GONE);
-            view1.setVisibility(View.VISIBLE);
-            Toast.makeText(this, "You have selected " + selectedDay + " " + selectedMonth + " " + selectedYear, Toast.LENGTH_SHORT).show();
-            setContentView(view1);
-        }
-
-        public void backToMainMenu (View v) {
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
-        }
-
-        public void openInputMenu(View v)   {
-            if(!selectedMonth.equals(""))    {
-                view1.setVisibility(View.GONE);
-                view3.setVisibility(View.VISIBLE);
-                setContentView(view3);
-                getFormattedNumber();
-            }
-               else {
-                Toast.makeText(this, "You haven't selected the day",Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        public void inputTheNumber(View v)  {
+        public void inputTheNumber(View v) {
             Button b = (Button) v;
             String displayedText = "";
             TextView incomeValue = (TextView) findViewById(R.id.incomeInput);
             displayedText =  incomeValue.getText().toString();
             String buttonText = b.getText().toString();
-            if(displayedText.equals(""))
-            {
+
+            if (displayedText.equals("")) {
                 displayedText = buttonText;
-            }
-            else    {
+            } else {
                 displayedText += buttonText;
             }
             incomeValue.setText(displayedText);
         }
 
-        public void removeNumber(View v)    {
+        public void removeNumber(View v) {
             TextView incomeValue = (TextView) findViewById(R.id.incomeInput);
-            if(!incomeValue.getText().equals("0"))
+
+            if (!incomeValue.getText().equals("0"))
             {
-                incomeValue.setText(incomeValue.getText().toString().substring(0,incomeValue.getText().length() - 1));
+                incomeValue.setText(incomeValue.getText().toString().substring(0,
+                        incomeValue.getText().length() - 1));
             }
-            if(incomeValue.length() == 0)
-            {
+
+            if (incomeValue.length() == 0) {
                 incomeValue.setText("0");
             }
         }
 
         public void addThisMonthIncome(View v) {
+            Calendar c = Calendar.getInstance();
+            c.set(selectedYear, selectedMonth, selectedDay);
+            long timeInMillis = c.getTimeInMillis();
+
             int incomeValueWithoutComma = 0;
             TextView incomeValue = (TextView) findViewById(R.id.incomeInput);
 
-                if (!incomeValue.getText().equals("0")) {
-                    if (incomeValue.getText().toString().contains(",")) {
-                        incomeValueWithoutComma = Integer.parseInt(incomeValue.getText().
-                                toString().replaceAll(",", ""));
-                    } else {
-                        incomeValueWithoutComma = Integer.parseInt(incomeValue.getText().toString());
-                    }
-                    DBHandler handler = new DBHandler(this);
-                    Boolean dataExist = false;
-                    DBContract.TABLE_EXPINCOME.insertIncomeData(handler.getWritableDatabase(),
-                            selectedMonth, incomeValueWithoutComma);
-                    handler.close();
-                    Toast.makeText(this, "You have input income :"  + incomeValue.getText() + " at " + selectedMonth, Toast.LENGTH_SHORT).show();
-
-//            dataExist = DBContract.TABLE_EXPINCOME.CheckDataIsExistOrNot(handler.getWritableDatabase(), selectedMonth);
-//            if(dataExist == true)
-//            {
-//                DBContract.TABLE_EXPINCOME.updateIncomeData(handler.getWritableDatabase(), selectedMonth, Integer.parseInt(incomeValue.getText().toString()));
-//            }
-//            else    {
-//                DBContract.TABLE_EXPINCOME.insertIncomeData(handler.getWritableDatabase(),selectedMonth,  Integer.parseInt(incomeValue.getText().toString()));
-//            }
+            if (!incomeValue.getText().equals("0")) {
+                if (incomeValue.getText().toString().contains(",")) {
+                    incomeValueWithoutComma = Integer.parseInt(incomeValue.getText().
+                            toString().replaceAll(",", ""));
+                } else {
+                    incomeValueWithoutComma = Integer.parseInt(incomeValue.getText().toString());
                 }
 
-            view3.setVisibility(View.GONE);
-            view1.setVisibility(View.VISIBLE);
-            setContentView(view1);
+                FinanceModel record = new FinanceModel();
+                record.setAmount(incomeValueWithoutComma);
+                record.setDate(timeInMillis);
+                record.setCategory("INCOME");
+
+                SQLiteHelper sQLiteHelper = new SQLiteHelper(this);
+                sQLiteHelper.insertRecord(record);
+
+                Toast.makeText(this, "You have input income :"  + incomeValue.getText()
+                                + " at " + "" + selectedDay + " " + selectedMonthInWords + " "
+                                + selectedYear, Toast.LENGTH_SHORT).show();
+
+                Intent i = new Intent(this, MainActivity.class );
+                startActivity(i);
+                } else {
+                    Toast.makeText(this, "You haven't input anything",
+                            Toast.LENGTH_LONG).show();
+                }
         }
 
         public void getFormattedNumber()    {
@@ -160,24 +143,24 @@ public class IncomeRecorder extends AppCompatActivity   {
                 public void afterTextChanged(Editable s) {
                     incomeValue.removeTextChangedListener(this);
                     DecimalFormat  formatter = new DecimalFormat("##,###,###");
-                    if(incomeValue.getText().toString().contains(","))
-                    {
-                        incomeValue.setText(incomeValue.getText().toString().replaceAll(",", ""));
+                    if(incomeValue.getText().toString().contains(",")) {
+                        incomeValue.setText(incomeValue.getText().toString()
+                                .replaceAll(",", ""));
                     }
-                    if(incomeValue.getText().toString().contains(" "))
-                    {
-                        incomeValue.setText(incomeValue.getText().toString().replaceAll(" ", ""));
+
+                    if(incomeValue.getText().toString().contains(" ")) {
+                        incomeValue.setText(incomeValue.getText().toString()
+                                .replaceAll(" ", ""));
                     }
-                    if(incomeValue.length()!= 0)
-                    {
+                    if(incomeValue.length()!= 0) {
                         formattedValue = formatter.format((Integer.parseInt
                                 (incomeValue.getText().toString())));
                     }
-                    else    {
+                    else {
                         formattedValue = "";
                     }
+
                     incomeValue.setText(formattedValue);
-                    //incomeValue.setSelection(incomeValue.getText().length());
                     incomeValue.addTextChangedListener(this);
                 }
             });

@@ -6,7 +6,7 @@
         <shape android:shape="oval">
             <corners
                 android:radius="3dp"/>?
-            <solid android:color="@color/indigo"/>
+            <solid android:color="@color/cyan"/>
         </shape>
     </item>
 </ripple>
